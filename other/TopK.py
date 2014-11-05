@@ -5,20 +5,19 @@ class Solution:
         return A[:k]
 
     def partition(self, A, l, r, k):
+        if l > r:
+            return
+
         i = l
         j = r
         x = A[l]
         while i < j:
             while A[j] >= x and j > i:
                 j -= 1
-            if i < j:
-                A[i] = A[j]
-                i += 1
+            A[i] = A[j]
             while A[i] <= x and i < j:
                 i += 1
-            if i < j:
-                A[j] = A[i]
-                j -= 1
+            A[j] = A[i]
         A[i] = x
         
         m = i - l + 1

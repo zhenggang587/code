@@ -5,7 +5,7 @@ class ListNode:
         self.next = None
 
 class Solution:
-    def getSolution(self, root):
+    def getSolution(self, head):
 
 if __name__ == "__main__":
     s = Solution()

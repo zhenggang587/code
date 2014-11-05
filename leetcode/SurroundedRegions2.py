@@ -7,7 +7,6 @@ class Solution:
         if not board or not board[0]:
             return
 
-        has_visited = set()
         queue = []
         m = len(board)
         n = len(board[0])
@@ -24,12 +23,11 @@ class Solution:
         while queue:
             (x, y) = queue.pop(0)
             board[x][y] = 'C'
-            has_visited.add((x, y))
             for (i, j) in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
                 xi, yj = x + i, y + j
                 if xi < 0 or xi >= m or yj < 0 or yj >= n:
                     continue
-                if board[xi][yj] == 'O' and (xi, yj) not in has_visited:
+                if board[xi][yj] == 'O':
                     queue.append((xi, yj))
 
         for i in range(m):

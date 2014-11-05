@@ -1,5 +1,7 @@
 import threading
 
+# 改进用hashmap+双向链表快速删除
+
 class observer:
     def __init__(self, val):
         self.val = val

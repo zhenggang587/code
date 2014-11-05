@@ -1,4 +1,6 @@
 
+# three coke machine
+
 class Solution:
     def getSolution(self, l, m, n):
         return self.traverse(l, [0, 0, 0], m, n)

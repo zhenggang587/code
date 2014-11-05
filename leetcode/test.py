@@ -1,38 +1,57 @@
 class Solution:
-    def init(self, n):
-        self.d = [i for i in range(n)]
-        self.r = [1 for i in range(n)]
+    def decimal(self, num1, num2):
+        if num1 == 0:
+            return 0
+        if num2 == 0:
+            raise Exception('divide zero')
 
-    def find(self, i):
-        if self.d[i] != i:
-            self.d[i] = self.find(self.d[i])
+        sign = 1
+        if num1 < 0:
+            num1 = -num1
+            sign = -sign
+        if num2 < 0:
+            num2 = -num2
+            sign = -sign
 
-        return self.d[i]
+        ret = ''
+        if sign < 0:
+            ret += '-'
 
-    def union(self, i, j):
-        p = self.find(i)
-        q = self.find(j)
-        if p == q:
-            return
+        ret += str(num1 / num2) + '.'
+        num1 %= num2
+        remain = {}
+        digit = ''
+        index = 0
+        cycle_start = -1
+        while num1:
+            if num1 not in remain:
+                remain[num1] = index
+            else:
+                cycle_start = remain[num1]
+                break
+            num1 *= 10
+            digit += str(num1 / num2)
+            num1 %= num2
+            index += 1
 
-        if self.r[p] >= self.r[q]:
-            self.d[q] = p
-            self.r[p] += self.r[q]
+
+        if cycle_start >= 0:
+            ret += digit[:cycle_start] + '(' + digit[cycle_start:] + ')'
         else:
-            self.d[p] = q
-            self.r[q] += self.r[p]
+            ret += digit + '(0)'
+        return ret
 
-    def findSuspect(self, n, groups):
-        self.init(n)
-        for group in groups:
-            for i in range(1, len(group)):
-                self.union(group[0], group[i])
-        
-        return self.r[self.d[0]]
 
+
+
+                
+            
+            
         
 
 if __name__ == "__main__":
     s = Solution()
      
-    print s.findSuspect(100, [[1, 2], [10, 13, 11, 12, 14], [0, 1], [99, 2]])
+    print s.decimal(1, 0)
+    print s.decimal(2, 4)
+    print s.decimal(22, -7)

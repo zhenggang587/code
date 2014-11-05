@@ -1,47 +1,36 @@
 
 class Solution:
-    # @param haystack, a string
-    # @param needle, a string
-    # @return a string or None
-    def strStr(self, haystack, needle):
-        if not needle:
-            return haystack
+    def getSolution(self, S, T):
+        next = self.getNext(S)
 
-        next = self.getnext(needle)
-        i = 0
-        j = 0
-        cnt = 0
-        while i < len(haystack):
-            while i < len(haystack) and j < len(needle):
-                if j == -1 or haystack[i] == needle[j]:
-                    i += 1
-                    j += 1
-                else:
-                    j = next[j]
-
-            if j >= len(needle):
-                cnt += 1
-                j = 0
-        return cnt 
-
-    def getnext(self, needle):
-        next = [-1 for i in range(len(needle))]
         j = -1
-        i = 0
-        while i < len(needle) - 1:
-            if j == -1 or needle[i] == needle[j]:
-                i += 1
-                j += 1
-                if needle[i] != needle[j]:
-                    next[i] = j
-                else:
-                    next[i] = next[j]
-            else:
+        m = len(T)
+        n = len(S)
+        cnt = 0
+        for i in range(m):
+            while j >= 0 and T[i] != S[j + 1]:
                 j = next[j]
+            if T[i] == S[j + 1]:
+                j += 1
 
+            if j == n - 1:
+                j = next[j]
+                cnt += 1
+        return cnt
+
+    def getNext(self, s):
+        n = len(s)
+        next = [-1 for i in range(n)]
+        j = -1
+        for i in range(1, n):
+            while j >= 0 and s[i] != s[j + 1]:
+                j = next[j]
+            if s[i] == s[j + 1]:
+                j += 1
+            next[i] = j
         return next
-        
+
 if __name__ == "__main__":
     s = Solution()
-
-    print s.strStr('a', 'a')
+    
+    print s.getSolution('aba', 'ababa')

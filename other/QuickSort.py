@@ -13,17 +13,13 @@ class Solution:
         while i < j:
             while A[j] >= x and j > i:
                 j -= 1
-            if i < j:
-                A[i] = A[j]
-                i += 1
+            A[i] = A[j]
             while A[i] <= x and i < j:
                 i += 1
-            if i < j:
-                A[j] = A[i]
-                j -= 1
+            A[j] = A[i]
         A[i] = x
                 
-        self.partition(A, l, i)
+        self.partition(A, l, i - 1)
         self.partition(A, i + 1, r)
 
 
@@ -31,6 +27,6 @@ class Solution:
 if __name__ == "__main__":
     s = Solution()
 
-    A = [5, 1, 2, 4, 3]
+    A = [3, 3, 2, 3]
     s.quickSort(A)
     print A

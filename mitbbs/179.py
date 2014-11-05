@@ -14,14 +14,15 @@ class Solution:
         ret = []
         while queue:
             n = len(queue)
+            maxVal = queue[0].val
             for k in range(n):
                 node = queue.pop(0)
                 if node.left:
                     queue.append(node.left)
                 if node.right:
                     queue.append(node.right)
-                if k == n - 1:
-                    ret.append(node.val)
+                maxVal = max(maxVal, node.val)
+            ret.append(maxVal)
         return ret
                 
 
