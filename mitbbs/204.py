@@ -92,4 +92,6 @@ if __name__ == "__main__":
     node12 = TreeNode('傻子')
     node6.left = node12
 
-    print s.getSolution(node1)
+    ret = s.getSolution(node1)
+    for a in ret:
+        print a

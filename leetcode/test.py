@@ -1,57 +1,39 @@
+
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
+class RandomListNode:
+    def __init__(self, x):
+        self.label = x
+        self.next = None
+        self.random = None
+
+# Definition for a undirected graph node
+class UndirectedGraphNode:
+    def __init__(self, x):
+        self.label = x
+        self.neighbors = []
+
 class Solution:
-    def decimal(self, num1, num2):
-        if num1 == 0:
-            return 0
-        if num2 == 0:
-            raise Exception('divide zero')
-
-        sign = 1
-        if num1 < 0:
-            num1 = -num1
-            sign = -sign
-        if num2 < 0:
-            num2 = -num2
-            sign = -sign
-
-        ret = ''
-        if sign < 0:
-            ret += '-'
-
-        ret += str(num1 / num2) + '.'
-        num1 %= num2
-        remain = {}
-        digit = ''
-        index = 0
-        cycle_start = -1
-        while num1:
-            if num1 not in remain:
-                remain[num1] = index
-            else:
-                cycle_start = remain[num1]
-                break
-            num1 *= 10
-            digit += str(num1 / num2)
-            num1 %= num2
-            index += 1
+    def cloneGraph(self, node):
 
 
-        if cycle_start >= 0:
-            ret += digit[:cycle_start] + '(' + digit[cycle_start:] + ')'
-        else:
-            ret += digit + '(0)'
-        return ret
+    def dfs(self, node, hasVisited):
+        if not node:
+            return None
+        if node in hasVisited:
+            return hasVisited[node]
 
+        cloneNode = UndirectedGraphNode(node.label)
+        hasVisited[node] = cloneNode
+        for neighbor in node.neighbors:
+            cloneNode.neighbors.append(self.dfs(neighbor, hasVisited))
 
-
-
-                
-            
-            
-        
+        return clo
+     
 
 if __name__ == "__main__":
     s = Solution()
-     
-    print s.decimal(1, 0)
-    print s.decimal(2, 4)
-    print s.decimal(22, -7)
+

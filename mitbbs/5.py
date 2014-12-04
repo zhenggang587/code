@@ -37,6 +37,41 @@ class Solution:
                 yield p.val
                 p = p.right
 
+class Solution1:
+    def getSolution(self, root1, root2):
+        p = [root1, root2]
+        stack = [[], []]
+
+        q1 = self.inorder(p, stack, 0)
+        q2 = self.inorder(p, stack, 1)
+        ret = []
+        while q1 != None and q2 != None:
+            if q1 < q2:
+                ret.append(q1)
+                q1 = self.inorder(p, stack, 0)
+            else:
+                ret.append(q2)
+                q2 = self.inorder(p, stack, 1)
+        while q1 != None:
+            ret.append(q1)
+            q1 = self.inorder(p, stack, 0)
+        while q2 != None:
+            ret.append(q2)
+            q2 = self.inorder(p, stack, 1)
+        return ret
+
+    def inorder(self, p, stack, index):
+        while stack[index] or p[index]:
+            if p[index]:
+                stack[index].append(p[index])
+                p[index] = p[index].left
+            else:
+                p[index] = stack[index].pop()
+                tmp = p[index].val
+                p[index] = p[index].right
+                return tmp
+        return None
+
 
 if __name__ == "__main__":
     s = Solution()

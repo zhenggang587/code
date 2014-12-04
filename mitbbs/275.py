@@ -1,12 +1,20 @@
 
+'''
+given string S, judge whether it's equal to a substring T which repeats K times. T is unknown, K is unknown
+for example: 
+S = 'abcabc', return True, because T = 'abc', K = 2
+S = 'ab', return False
+'''
+
 class Solution:
     def getSolution(self, s):
         next = self.getNext(s)
         n = len(s)
-        i = 0
-        while i < n and next[i] == -1:
-            i += 1
+        i = n - 1
+        while i >= 0 and next[i] != -1:
+            i -= 1
 
+        i += 1
         K = i
         j = 0
         while i < n and next[i] == j:
@@ -22,16 +30,17 @@ class Solution:
 
         j = -1
         for i in range(1, n):
-            if j >= 0 and s[i] != s[j + 1]:
+            while j != -1 and s[i] != s[j + 1]:
                 j = next[j]
             if s[i] == s[j + 1]:
                 j += 1
-            next[i] = j
+                next[i] = j
         return next
 
 if __name__ == "__main__":
     s = Solution()
     
-    print s.getSolution('aaaa')
-    print s.getSolution('abcabc')
-    print s.getSolution('abcabcab')
+    assert s.getSolution('aaaa') == True
+    assert s.getSolution('abcabcabc') == True
+    assert s.getSolution('abcabcab') == False
+    assert s.getSolution('aaabaaab') == True

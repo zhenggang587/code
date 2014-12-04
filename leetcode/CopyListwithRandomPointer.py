@@ -57,10 +57,10 @@ if __name__ == "__main__":
     node2 = RandomListNode(2)
     node3 = RandomListNode(3)
     node4 = RandomListNode(4)
-    #node1.next = node2
+    node1.next = node2
     node2.next = node3
     node3.next = node4
-    #node1.random = node4
+    node1.random = node4
     node2.random = node2
     node3.random = node1
 

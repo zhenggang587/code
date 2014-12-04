@@ -15,6 +15,9 @@ class Solution:
             val += 1
         return ret
 
+    def getSolution1(self, A):
+           
+
 
 if __name__ == "__main__":
     s = Solution()

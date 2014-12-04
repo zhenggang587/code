@@ -13,6 +13,9 @@ class ListNode:
         self.next = None
 
 class Solution:
+    def __init__(self):
+        self.head = None
+
     # @param head, a list node
     # @return a tree node
     def sortedListToBST(self, head):
@@ -21,19 +24,20 @@ class Solution:
         while cur:
             n += 1
             cur = cur.next
+        self.head = head
 
-        return self.convert(head, 0, n - 1)
+        return self.convert(0, n - 1)
 
-    def convert(self, head, start, end):
+    def convert(self, start, end):
         if start > end:
             return None
 
         mid = start + (end - start) / 2
-        left_node = self.convert(head, start, mid - 1)
-        parent = TreeNode(head.val)
+        left_node = self.convert(start, mid - 1)
+        parent = TreeNode(self.head.val)
         parent.left = left_node
-        head = head.next
-        parent.right = self.convert(head, mid + 1, end)
+        self.head = self.head.next
+        parent.right = self.convert(mid + 1, end)
 
         return parent
 
@@ -52,5 +56,5 @@ if __name__ == "__main__":
     treenode = s.sortedListToBST(node1)
     print treenode.val
     print treenode.left.val
-    print treenode.left.left.val
     print treenode.right.val
+    print treenode.right.right.val

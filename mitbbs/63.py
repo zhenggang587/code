@@ -25,8 +25,28 @@ class Solution:
 
         return min(dp[m - 1])
 
+    def getSolution1(self, A):
+        h = sorted(list(set(A))) 
+        m = len(h)
+        n = len(A)
+        INT_MAX = (1 << 31)
+        dp = [[INT_MAX for j in range(m)] for i in range(2)]
+        for j in range(m):
+            dp[0][j] = max(A[0] - h[j], 0)
+
+        for i in range(1, n):
+            for j in range(m):
+                cost = A[i]
+                if A[i] >= h[j]:
+                    cost = A[i] - h[j]
+
+                dp[i % 2][j] = INT_MAX
+                for k in range(j + 1):
+                    dp[i % 2][j] = min(dp[i % 2][j], dp[(i - 1) % 2][k] + cost)
+        return min(dp[(n - 1) % 2])
+
 
 if __name__ == "__main__":
     s = Solution()
     
-    print s.getSolution([10, 1, 2, 3])
+    print s.getSolution([10, 1, 2, 3, 4, 5])

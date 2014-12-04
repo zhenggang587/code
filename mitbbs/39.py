@@ -21,11 +21,11 @@ class Solution:
         for p, s in queue:
             if s == 0:
                 cnt += 1
-                if cnt > maxCnt:
-                    maxCnt = cnt
-                    maxP = p
             else:
                 cnt -= 1
+            if cnt > maxCnt:
+                maxCnt = cnt
+                maxP = p
         return maxP
             
 

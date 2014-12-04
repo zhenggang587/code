@@ -11,10 +11,10 @@ class Solution:
     def insert(self, k, weight):
         if k not self.map:
             self.map[k] = len(self.arr)
-            self.arr.append([k, 0, weight])
+            self.arr.append([k, 0, 0])
 
         idx = self.map[k]
-        weight_diff = self.weight - self.arr[idx][2]
+        weight_diff = weight - self.arr[idx][2]
         self.arr[idx][2] = weight
         i = idx
         while i >= 0:
@@ -53,7 +53,8 @@ class Solution:
 
         r = random.randint(1, self.arr[0][1])
         i = 0
-        while i < len(self.arr):
+        n = len(self.arr)
+        while i < n:
             r -= self.arr[i][2]
             if r <= 0:
                 return self.arr[i][0]
@@ -63,6 +64,21 @@ class Solution:
                 i += 1
         return None
 
+
+if __name__ == "__main__":
+    s = Solution()
+     
+    s.insert(1, 1)
+    s.insert(2, 2)
+    s.insert(3, 3)
+    s.insert(4, 4)
+    print s.getRandom()
+    print s.getRandom()
+    print s.getRandom()
+    s.delete(3)
+    print s.getRandom()
+    print s.getRandom()
+    print s.getRandom()
 
 
             

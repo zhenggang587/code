@@ -25,5 +25,4 @@ if __name__ == "__main__":
     node1.right = node2
     node2.left = node3
 
-
     print s.dist(node1)

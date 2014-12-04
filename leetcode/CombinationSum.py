@@ -32,4 +32,4 @@ class Solution:
 if __name__ == "__main__":
     s = Solution()
 
-    print s.combinationSum([], 8)
+    print s.combinationSum([4, 4], 8)
