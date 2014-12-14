@@ -31,3 +31,6 @@ if __name__ == "__main__":
     s.sortColors(A)
     print A
 
+    A = [2, 1, 2]
+    s.sortColors(A)
+    print A

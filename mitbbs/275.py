@@ -20,7 +20,7 @@ class Solution:
         while i < n and next[i] == j:
             i += 1
             j += 1
-        if i == n and n % K == 0:
+        if i == n and n % K == 0 and n != K:
             return True
         return False
 
@@ -43,4 +43,5 @@ if __name__ == "__main__":
     assert s.getSolution('aaaa') == True
     assert s.getSolution('abcabcabc') == True
     assert s.getSolution('abcabcab') == False
+    assert s.getSolution('abc') == False
     assert s.getSolution('aaabaaab') == True

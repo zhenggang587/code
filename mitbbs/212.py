@@ -7,50 +7,46 @@ class Formula:
 
     def calculate(self):
         s = self.s
-        start = end = 0
+        priority = {'+': 0, '-': 0, '*': 1, '/': 1}
         numStack = []
-        symbolStack = []
-        while end < len(self.s):
-            if s[end] in '+-*/':
-                num = int(self.s[start:end])
-                start = end + 1
-                if not numStack:
-                    numStack.append(num)
-                if not symbolStack:
-                    symbolStack.append(s[end])
-                else:
-                    if symbolStack[-1] in '+-' and s[end] in '*/':
-                        numStack.append(num)
-                    else:
-                        lop = numStack.pop()
-                        symbol = symbolStack.pop()
-                        if symbol == '+':
-                            val = lop + num
-                        elif symbol == '-':
-                            val = lop - num
-                        elif symbol == '*':
-                            val = lop * num
-                        else:
-                            val = lop / num
-                        numStack.append(val)
-                    symbolStack.append(s[end])
-            end += 1
-
-        num = int(self.s[start:end])
-        numStack.append(num)
-        while symbolStack:
-            rop = numStack.pop()
-            lop = numStack.pop()
-            symbol = symbolStack.pop()
-            if symbol == '+':
-                val = lop + rop
-            elif symbol == '-':
-                val = lop - rop
-            elif symbol == '*':
-                val = lop * rop
+        opStack = []
+        token = ''
+        for i in range(len(s)):
+            if s[i] >= '0' and s[i] <= '9':
+                token += s[i]
             else:
-                val = lop / rop
-            numStack.append(val)
+                numStack.append(int(token))
+                token = ''
+
+                while opStack and priority[opStack[-1]] >= priority[s[i]]:
+                    rightNum = numStack.pop()
+                    leftNum = numStack.pop()
+                    op = opStack.pop()
+                    if op == '+':
+                        res = leftNum + rightNum
+                    elif op == '-':
+                        res = leftNum - rightNum
+                    elif op == '*':
+                        res = leftNum * rightNum
+                    else:
+                        res = leftNum / rightNum
+                    numStack.append(res)
+                opStack.append(s[i])
+        numStack.append(int(token))
+
+        while opStack:
+            op = opStack.pop()
+            rightNum = numStack.pop()
+            leftNum = numStack.pop()
+            if op == '+':
+                res = leftNum + rightNum
+            elif op == '-':
+                res = leftNum - rightNum
+            elif op == '*':
+                res = leftNum * rightNum
+            else:
+                res = leftNum / rightNum
+            numStack.append(res)
         return numStack[0]
 
 
@@ -58,6 +54,6 @@ class Formula:
         return self.s 
 
 if __name__ == "__main__":
-    s = Formula('1+2*3')
+    s = Formula('3/6-1*4+11')
     
     print s.calculate()

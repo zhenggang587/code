@@ -1,33 +1,44 @@
 
+INT_MAX = (1 << 31)
+
 class Solution:
     def getSolution(self, A, B):
-        for i in range(len(B)):
-            if B[i] in A:
-                A.remove(B[i])
+        n = len(A)
+        left = A
+        used = []
+        i = 0
+        while i < n:
+            if i < n - 1 and B[i] in left:
+                used.append(B[i])
+                left.remove(B[i])
+                i += 1
             else:
-                bigger = self.findBigger(A, B[i])
-                while bigger == (1 << 31) and i > 0:
-                    i -= 1
-                    A.add(B[i])
-                    bigger = self.findBigger(A, B[i])
-                if bigger == (1 << 31):
-                    return False
-                else:
-                    ret = B[:i]
-                    ret.append(bigger)
-                    A.remove(bigger)
-                    ret.extend(sorted(A))
-                    return ret
-        return False
+                while i >= 0:
+                    greater = self.find(left, B[i])
+                    if greater != INT_MAX:
+                        used.append(greater)
+                        left.remove(greater)
+                        left.sort()
+                        used.extend(left)
+                        return used
+                    else:
+                        if not used:
+                            return False
+                        left.append(used.pop())
+                        i -= 1
 
-    def findBigger(self, A, num):
-        ret = (1 << 31)
-        for a in A:
+    def find(self, arr, num):
+        ret = INT_MAX
+        for a in arr:
             if a > num and a < ret:
                 ret = a
         return ret
 
+         
+
 if __name__ == "__main__":
     s = Solution()
-    
-    print s.getSolution([4, 0, 6, 0], [5, 1, 3, 2])
+
+    assert s.getSolution([1, 2, 3, 4], [2, 4, 3, 0]) == [2, 4, 3, 1]
+    assert s.getSolution([1, 3], [1, 3]) == [3, 1]
+    assert s.getSolution([1, 1], [1, 3]) == False

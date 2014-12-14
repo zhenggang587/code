@@ -17,5 +17,5 @@ class Solution:
 if __name__ == "__main__":
     s = Solution()
 
-    print s.getSolution([1, 2, 3], [3, 2, 1])
+    print s.getSolution([1, 2, 3], [2, 3, 1])
 

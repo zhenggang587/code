@@ -34,11 +34,13 @@ class Solution:
 if __name__ == "__main__":
     s = Solution()
     
-    node1 = TreeNode(10)
-    node2 = TreeNode(2)
-    node3 = TreeNode(35)
-    node1.right = node2
-    node2.left = node3
+    node1 = TreeNode(6)
+    node2 = TreeNode(1)
+    node3 = TreeNode(2)
+    node4 = TreeNode(2)
+    node1.left = node2
+    node1.right = node3
+    node3.left = node4
     s.serialize(node1)
     node = s.deserialize()
     print node.val

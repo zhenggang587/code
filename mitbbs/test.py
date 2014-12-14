@@ -19,21 +19,13 @@ class Interval:
     def __str__(self):
         return '[' + str(self.start) + ',' + str(self.end) + ']'
 
+INT_MAX = (1 << 31)
 
 class Solution:
-    def getSolution(self, root):
-    
-
+    def getSolution(self, A, B, pa, pb):
+         
 
 if __name__ == "__main__":
     s = Solution()
 
-    node1 = ListNode(1) 
-    node2 = ListNode(2) 
-    node3 = ListNode(3) 
-    node4 = ListNode(5) 
-    node1.next = node2
-    node2.next = node3
-
-    s.printList(s.getSolution(node1))
-
+    print s.getSolution([[1, 2], [2, 5]], [[3, 4], [2, 8]], 1, 0)

@@ -1,4 +1,5 @@
 
+# assume no duplicate word in the sentence
 class Solution:
     def getSolution(self, strs):
         invertedMap = {}

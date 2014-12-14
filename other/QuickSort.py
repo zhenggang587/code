@@ -14,7 +14,7 @@ class Solution:
             while A[j] >= x and j > i:
                 j -= 1
             A[i] = A[j]
-            while A[i] <= x and i < j:
+            while A[i] < x and i < j:
                 i += 1
             A[j] = A[i]
         A[i] = x
